@@ -5,6 +5,8 @@ edition = "2024"
 
 [dependencies]
 hklib = { path = "../hklib" }
+
+imgui = "0.12.0"
 windows = { version = "0.62.0", features = ["Win32_Graphics_Gdi", "Win32_Graphics_OpenGL"] }
 
 [lib]
