@@ -31,7 +31,7 @@ impl Gui {
     pub fn draw(&mut self, state: &mut SharedState) {
         let ui = self.ctx.frame();
         ui.window("Cheat menu")
-            .size([400.0, 200.0], imgui::Condition::Always)
+            .size([400.0, 400.0], imgui::Condition::Always)
             .position([10.0, 10.0], imgui::Condition::FirstUseEver)
             .build(|| {
                 ui.text("Click H to hide/show");
@@ -43,14 +43,19 @@ impl Gui {
                 ui.checkbox("ESP (F2)", &mut state.esp);
                 ui.checkbox("Trace Lines (F3)", &mut state.trace);
                 ui.checkbox("Aimbot (F4) (LCTRL)", &mut state.aimbot);
+                ui.checkbox("No Clip (C)", &mut state.no_clip);
+                ui.checkbox("Crosshair (F6)", &mut state.crosshair);
+                ui.checkbox("Wallbang (F7)", &mut state.wallbang);
                 
                 ui.next_column();
                 
                 // Right column
-                ui.checkbox("No Clip (F5)", &mut state.no_clip);
-                ui.checkbox("Crosshair (F6)", &mut state.crosshair);
-                ui.checkbox("Wallbang (F7)", &mut state.wallbang);
                 ui.checkbox("Maphack (F8)", &mut state.maphack.is_enabled());
+                ui.checkbox("No Recoil (F9)", &mut state.norecoil);
+                ui.checkbox("Infinite Ammo (NUM0)", &mut state.infinite_ammo);
+                ui.checkbox("Fast Shoot (NUM1)", &mut state.fastshoot);
+                ui.checkbox("Fullbright (NUM2)", &mut state.fullbright.is_enabled());
+                ui.checkbox("Wallhack (NUM3)", &mut state.wallhack.is_enabled());
                 
                 ui.columns(1, "", false); // Reset to single column
                 

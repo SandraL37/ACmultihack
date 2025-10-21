@@ -21,6 +21,11 @@ thread_local! {
                 triggerbot: false,
                 wallbang: false,
                 maphack: hacks::maphack(),
+                infinite_ammo: false,
+                norecoil: false,
+                fastshoot: false,
+                fullbright: hacks::fullbright(),
+                wallhack: hacks::wallhack(),
                 show_menu: false,
             }
         )

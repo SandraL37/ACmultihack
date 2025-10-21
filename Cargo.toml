@@ -1,5 +1,5 @@
 [package]
-name = "testhacks"
+name = "ACmultihack"
 version = "0.1.0"
 edition = "2024"
 
@@ -7,11 +7,8 @@ edition = "2024"
 hklib = { path = "../hklib" }
 
 imgui = "0.12.0"
+rand = "0.9.2"
 windows = { version = "0.62.0", features = ["Win32_Graphics_Gdi", "Win32_Graphics_OpenGL"] }
 
 [lib]
 crate-type = ["cdylib"]
-
-[[bin]]
-name = "builder"
-path = "src/builder/main.rs"

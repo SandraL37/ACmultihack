@@ -14,6 +14,10 @@ pub mod offsets {
     pub const CURRENT_FRAME: usize = 0x17F10C;
 	pub const GAMEMODE: usize = 0x18ABF8;
 	pub const POINTED_POSITION: usize = 0x00192064;
+    // pub const EDITING_ACTIVE: usize = 0x001801BD;
+    // pub const FULLBRIGHT_ACTIVE: usize = 0x001801C1;
+    pub const LIGHTS: usize = 0x00182938;
+    pub const LIGHTS_BYTES: usize = 0x00182998;
 }
 
 pub struct Game {
@@ -87,10 +91,45 @@ impl Game {
 	pub fn print(&self, msg: String) {
 		let console: extern "C" fn(usize, usize) = unsafe { std::mem::transmute(0x004DAD50) };
 		let binding = msg + "\0";
-  	let c_str = CStr::from_bytes_with_nul(binding.as_bytes()).unwrap();
+  	    let c_str = CStr::from_bytes_with_nul(binding.as_bytes()).unwrap();
 		console(c_str.as_ptr() as usize, 0);
 	}
+
+    pub fn lights(&self) -> Vec<*mut Light> {
+        let base = self.ptr_at::<Light>(offsets::LIGHTS);
+        let mut lights = Vec::new();
+        for i in 0..self.lights_count() {
+            let light = unsafe { base.add(i as usize) };
+            lights.push(light);
+        }
+        lights
+    }
+
+    pub fn lights_count(&self) -> u32 {
+        unsafe { *((self.base + offsets::LIGHTS_BYTES) as *mut u32) }
+    }
 }
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct Light {
+    pub n00000530: u8, //0x0000
+    pub n00000541: u8, //0x0001
+    pub smt1: u8, //0x0002
+    pub smt2: u8, //0x0003
+    pub smt3: u8, //0x0004
+    pub smt4: u8, //0x0005
+    pub r: u8, //0x0006
+    pub g: u8, //0x0007
+    pub b: u8, //0x0008
+    pub n00000547: u8, //0x0009
+    pub n00000553: u8, //0x000A
+    pub n00000548: u8, //0x000B
+    pub smt5: u8, //0x000C
+    pub n0000054a: u8, //0x000D
+    pub n00000556: u8, //0x000E
+    pub n0000054b: u8, //0x000F
+} //Size: 0x0010
 
 #[repr(C)]
 #[derive(Clone)]

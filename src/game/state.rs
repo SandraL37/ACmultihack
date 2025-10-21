@@ -1,6 +1,5 @@
 use std::cell::RefMut;
-
-use hklib::mem::patch::Patch;
+use crate::hacks::{Fullbright, Maphack, WallHack};
 
 pub struct State {
     pub aimbot: bool,
@@ -10,8 +9,13 @@ pub struct State {
     pub trace: bool,
     pub triggerbot: bool,
     pub wallbang: bool,
+    pub maphack: Maphack,
+    pub infinite_ammo: bool,
+    pub norecoil: bool,
+    pub fastshoot: bool,
+    pub fullbright: Fullbright,
+    pub wallhack: WallHack,
     pub show_menu: bool,
-    pub maphack: Patch,
 }
 
 pub type SharedState<'a> = RefMut<'a, State>;

@@ -28,7 +28,7 @@ extern "system" fn hkwgl_swap_buffers(hdc: *mut std::ffi::c_void) -> i32 {
             if is_key_pressed(VK_F4) {
                 state.aimbot = !state.aimbot;
             }
-            if is_key_pressed(VK_F5) {
+            if is_key_pressed(VK_C) {
                 state.no_clip = !state.no_clip;
                 hacks::no_clip(local);
             }
@@ -39,7 +39,22 @@ extern "system" fn hkwgl_swap_buffers(hdc: *mut std::ffi::c_void) -> i32 {
                 state.wallbang = !state.wallbang;
             }
             if is_key_pressed(VK_F8) {
-                state.maphack.toggle().unwrap();
+                state.maphack.toggle();
+            }
+            if is_key_pressed(VK_F9) {
+                state.norecoil = !state.norecoil;
+            }
+            if is_key_pressed(VK_NUMPAD0) {
+                state.infinite_ammo = !state.infinite_ammo;
+            }
+            if is_key_pressed(VK_NUMPAD1) {
+                state.fastshoot = !state.fastshoot;
+            }
+            if is_key_pressed(VK_NUMPAD2) {
+                state.fullbright.toggle();
+            }
+            if is_key_pressed(VK_NUMPAD3) {
+                state.wallhack.toggle();
             }
     
             let overlay = Overlay::new(GAME.view_matrix(), 90.0).unwrap();

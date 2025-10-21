@@ -9,11 +9,10 @@ pub mod gui;
 
 #[hklib::dll_main]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let manager = HookManager::setup_hooks()?;
-    manager.persist();
+    let _manager = HookManager::setup_hooks()?;
 
     loop {
-        std::thread::sleep(std::time::Duration::from_millis(100));
+        std::thread::sleep(std::time::Duration::from_millis(10));
         if is_key_pressed(VK_DELETE) {
             break;
         }
